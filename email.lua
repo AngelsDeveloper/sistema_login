@@ -17,6 +17,16 @@ end
 ------------------------------------------------------------------------
 ------------------------------- FUNCTIONS ------------------------------
 ------------------------------------------------------------------------
+function VerificarEmailExistente(_email, data)
+    for key,users in pairs(data) do
+        if users.email == _email then
+            io.write("\n", "[ERROR]: Email já existente no banco de dados.", "\n")
+            return false
+        end
+    end
+    return true
+end
+
 
 function VerificarProvedorEmail(_email)
     local first, last
@@ -54,14 +64,14 @@ function VerificarTamanhoUseremail(_useremail)
 	return true
 end
 
-function InputEmail()
+function InputEmail(data)
     io.write("\n", "Digite seu email: ")
     local email = io.read()
 
     local useremail, provedor = VerificarProvedorEmail(email)
 
-    if not useremail or not VerificarTamanhoUseremail(useremail) then
-        return InputEmail()
+    if not useremail or not VerificarTamanhoUseremail(useremail) or not VerificarEmailExistente(email, data) then
+        return InputEmail(data)
     end
 
     return email
