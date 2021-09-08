@@ -27,11 +27,7 @@ function InputPassword()
     io.write("Digite sua senha novamente: ")
     local confirmation = io.read()
     
-    if not VerificarIgualdadePassword(password, confirmation) then
-        password = InputPassword() -- Stack overflow (call stack)
-    end
-
-    if not VerificarTamanhoPassword(password) then
+    if not VerificarIgualdadePassword(password, confirmation) or not VerificarTamanhoPassword(password) then
         return InputPassword()
     end
 
