@@ -22,7 +22,7 @@ database.conteudo = database.file:read("*a")
 database.data = json.decode(database.conteudo) or {}
 
 user.username = username.InputUsername()
-user.email = email.InputEmail()
+user.email = email.InputEmail(database.data)
 user.password = password.InputPassword()
 
 database.data[#database.data + 1] = user
